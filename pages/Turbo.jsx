@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Inter } from 'next/font/google';
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import Gallery2 from '@/components/Gallery2'
