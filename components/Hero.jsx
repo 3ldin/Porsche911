@@ -9,6 +9,7 @@ const Hero = () => {
                 autoPlay
                 loop
                 muted
+                playsInline
             />
             <div className="absolute top-0 left-0 w-full h-full flex flex-col text-center items-center justify-center">
                 <h1 className="text-5xl text-white font-bold drop-shadow-xl">Porsche 911</h1>
