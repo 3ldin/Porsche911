@@ -1,22 +1,34 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import Gallery4 from '@/components/Gallery4'
 import { FaArrowUp } from 'react-icons/fa';
 import GT2ModelsSection from '@/components/GT2ModelsSection';
-
+import LoadingSpinner from '@/components/LoadingSpinner';
 
 const GT2 = () => {
+  const [loading, setLoading] = useState(true); 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false); 
+    }, 1000); 
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
     });
   };
-  
+
   return (
     <div className='bg-[#e9e8e8]'>
     <Navbar  />
+    {loading ? (
+        <LoadingSpinner />
+      ) : (
     <div className='mx-auto py-20 '>
       <h1 className='text-4xl font-bold mb-10 text-black text-center'>GT2</h1>
 
@@ -24,8 +36,8 @@ const GT2 = () => {
       <div className='grid lg:grid-cols-4 mx-auto gap-8'>
         <img src='/images/GT2/silver2rs.jpg' className='lg:col-span-2' />
           <div className='lg:col-span-2 flex flex-col justify-center'>
-            <h2 className='text-black font-bold text-2xl lg:text-3xl text-center lg:text-left'>The Porsche 911 GT2, the Widowmaker. The GT2 is the pinnacle of the 911 chasis and pushes the limits of the GT3, and every other car on the road. </h2>
-            <p className='text-black font-semibold text-xl  text-center lg:text-left mt-8 lg:mt-16'>With its turbocharged flat-six, the GT2RS produces nearly 700 horsepower. The GT2RS is the fastest, and most rowdy 911 on the road. Although it may not have the naturally aspirated scream of the GT3RS, it makes up for it in performance on the track, putting it in a whole different class of it&apos;s own.</p>
+            <h2 className='text-black font-bold text-2xl lg:text-3xl mx-4 lg:mx-0 text-center lg:text-left'>The Porsche 911 GT2, the Widowmaker. The GT2 is the pinnacle of the 911 chasis and pushes the limits of the GT3, and every other car on the road. </h2>
+            <p className='text-black font-semibold text-xl mx-6 lg:mx-0  text-center lg:text-left mt-8 lg:mt-16'>With its turbocharged flat-six, the GT2RS produces nearly 700 horsepower. The GT2RS is the fastest, and most rowdy 911 on the road. Although it may not have the naturally aspirated scream of the GT3RS, it makes up for it in performance on the track, putting it in a whole different class of it&apos;s own.</p>
           </div>
       </div>
       </section>
@@ -76,6 +88,7 @@ const GT2 = () => {
       </button>
     </div>
   </div>
+  )}
 <Footer />
   </div>
   )

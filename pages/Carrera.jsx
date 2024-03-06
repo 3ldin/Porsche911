@@ -1,11 +1,21 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import Gallery1 from '@/components/Gallery1'
 import { FaArrowUp } from 'react-icons/fa';
+import LoadingSpinner from '@/components/LoadingSpinner';
 
 
 const Carrera = () => {
+  const [loading, setLoading] = useState(true); 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false); 
+    }, 1000); 
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -16,6 +26,9 @@ const Carrera = () => {
   return (
     <div className='bg-[#e9e8e8]'>
     <Navbar  />
+    {loading ? (
+        <LoadingSpinner />
+      ) : (
     <div className='mx-auto py-20 '>
     <h1 className='text-4xl font-bold mb-10 text-black text-center'>Carrera</h1>
     
@@ -25,7 +38,7 @@ const Carrera = () => {
         <div className='lg:col-span-2 flex flex-col justify-center'>
             <h2 className='text-black font-bold text-2xl lg:text-3xl text-center lg:text-left'>
 The Porsche 911 Carrera, an icon among sports cars, stands as a testament to Porsche&apos;s enduring commitment to performance, precision, and style.</h2>
-            <p className='text-black font-semibold text-xl  text-center lg:text-left mt-8 lg:mt-16'>With its distinctive silhouette, characterized by its rear-engine layout, the 911 Carrera embodies the essence of automotive excellence. Renowned for its exceptional agility and handling, the Carrera delivers an exhilarating driving experience on both the racetrack and the open road.</p>
+            <p className='text-black font-semibold text-xl mx-6 lg:mx-0 text-center lg:text-left mt-8 lg:mt-16'>With its distinctive silhouette, characterized by its rear-engine layout, the 911 Carrera embodies the essence of automotive excellence. Renowned for its exceptional agility and handling, the Carrera delivers an exhilarating driving experience on both the racetrack and the open road.</p>
         </div>
     </div>
 </section>
@@ -70,6 +83,8 @@ The Porsche 911 Carrera, an icon among sports cars, stands as a testament to Por
             </button>
           </div>
 </div>
+)}
+
 <Footer />
 
 </div>

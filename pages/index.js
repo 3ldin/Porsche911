@@ -1,4 +1,5 @@
 import { Inter } from "next/font/google";
+import { Noto_Sans_JP } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Models from "@/components/Models";

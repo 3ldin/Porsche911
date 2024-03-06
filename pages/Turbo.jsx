@@ -1,11 +1,21 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import Gallery2 from '@/components/Gallery2'
 import { FaArrowUp } from 'react-icons/fa';
+import LoadingSpinner from '@/components/LoadingSpinner';
 
 
 const Turbo = () => {
+  const [loading, setLoading] = useState(true); 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false); 
+    }, 1000); 
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -16,6 +26,9 @@ const Turbo = () => {
   return (
     <div className='bg-[#e9e8e8]'>
     <Navbar  />
+    {loading ? (
+        <LoadingSpinner />
+      ) : (
     <div className='mx-auto py-20 '>
       <h1 className='text-4xl font-bold mb-10 text-black text-center'>Turbo</h1>
       
@@ -24,8 +37,8 @@ const Turbo = () => {
       <div className='grid lg:grid-cols-4 mx-auto gap-8'>
         <img src='/images/Turbo/silver992.jpg' className='lg:col-span-2' />
           <div className='lg:col-span-2 flex flex-col justify-center'>
-            <h2 className='text-black font-bold text-2xl lg:text-3xl text-center lg:text-left'>The Porsche 911 Turbo, a pinnacle of automotive engineering, epitomizes power, precision, and performance.</h2>
-            <p className='text-black font-semibold text-xl  text-center lg:text-left mt-8 lg:mt-16'>With its iconic rear-engine design and turbocharged powertrain, the 911 Turbo commands attention on the road and the track. Renowned for its blistering acceleration and cutting-edge technology, the Turbo delivers an unparalleled driving experience that pushes the boundaries of automotive excellence.</p>
+            <h2 className='text-black font-bold text-2xl lg:text-3xl mx-4 lg:mx-0 text-center lg:text-left'>The Porsche 911 Turbo, a pinnacle of automotive engineering, epitomizes power, precision, and performance.</h2>
+            <p className='text-black font-semibold text-xl mx-6 lg:mx-0 text-center lg:text-left mt-8 lg:mt-16'>With its iconic rear-engine design and turbocharged powertrain, the 911 Turbo commands attention on the road and the track. Renowned for its blistering acceleration and cutting-edge technology, the Turbo delivers an unparalleled driving experience that pushes the boundaries of automotive excellence.</p>
           </div>
       </div>
       </section>
@@ -71,6 +84,7 @@ const Turbo = () => {
       </button>
     </div>
   </div>
+  )}
 <Footer />
   </div>
   )

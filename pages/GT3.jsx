@@ -1,22 +1,34 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import Gallery3 from '@/components/Gallery3'
 import { FaArrowUp } from 'react-icons/fa';
 import GT3ModelsSection from '@/components/GT3ModelsSection';
+import LoadingSpinner from '@/components/LoadingSpinner';
 
 
 const GT3 = () => {
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false); 
+    }, 1000); 
+    return () => clearTimeout(timer); 
+  }, []);
+
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
     });
   };
-  
+ 
   return (
     <div className='bg-[#e9e8e8]'>
     <Navbar  />
+    {loading ? (
+        <LoadingSpinner />
+      ) : (
     <div className='mx-auto py-20 '>
       <h1 className='text-4xl font-bold mb-10 text-black text-center'>GT3</h1>
 
@@ -24,8 +36,8 @@ const GT3 = () => {
       <div className='grid lg:grid-cols-4 mx-auto gap-8'>
         <img src='/images/GT3/shark.jpeg' className='lg:col-span-2' />
           <div className='lg:col-span-2 flex flex-col justify-center'>
-            <h2 className='text-black font-bold text-2xl lg:text-3xl text-center lg:text-left'>The Porsche 911 GT3, an embodiment of automotive excellence, represents the perfect fusion of track-inspired performance and everyday drivability.</h2>
-            <p className='text-black font-semibold text-xl  text-center lg:text-left mt-8 lg:mt-16'>With its track-focused design and naturally aspirated powerplant, the 911 GT3 demands respect on both the street and the circuit. Celebrated for its exhilarating acceleration and state-of-the-art engineering, the GT3 offers a driving experience that sets new benchmarks for automotive performance.</p>
+            <h2 className='text-black font-bold text-2xl lg:text-3xl mx-4 lg:mx-0 text-center lg:text-left'>The Porsche 911 GT3, an embodiment of automotive excellence, represents the perfect fusion of track-inspired performance and everyday drivability.</h2>
+            <p className='text-black font-semibold text-xl mx-6 lg:mx-0  text-center lg:text-left mt-8 lg:mt-16'>With its track-focused design and naturally aspirated powerplant, the 911 GT3 demands respect on both the street and the circuit. Celebrated for its exhilarating acceleration and state-of-the-art engineering, the GT3 offers a driving experience that sets new benchmarks for automotive performance.</p>
           </div>
       </div>
       </section>
@@ -76,6 +88,7 @@ const GT3 = () => {
       </button>
     </div>
   </div>
+  )}
 <Footer />
   </div>
   )

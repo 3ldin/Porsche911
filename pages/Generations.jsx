@@ -1,10 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
+import LoadingSpinner from '@/components/LoadingSpinner';
+import { FaArrowUp } from 'react-icons/fa';
 
 const Timeline = () => {
+  const [loading, setLoading] = useState(true); 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false); 
+    }, 1000); 
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+  
   const generations = [
     { year: '1963', model: '901', description: 'The first generation of the Porsche 911, originally known as the Porsche 901 before a name change due to trademark issues, represents the inception of an automotive legend. Introduced in 1963, it laid the foundation for the iconic Porsche 911 lineage, boasting a sleek design, rear-engine layout, and a flat-six engine configuration. The 901 set the standard for sports car performance, blending driving dynamics with everyday usability, and quickly gained a reputation for its agility, handling, and timeless design.', image: '/images/Generations/1963.jfif' },
     { year: '1975', model: '930', description: 'The second generation of the Porsche 911, known as the 930, marked the introduction of the legendary Porsche 911 Turbo. Introduced in 1975, the 930 was a game-changer, featuring a turbocharged engine that delivered exhilarating performance and distinctive styling cues like the iconic "whale tail" rear spoiler. Renowned for its powerful acceleration and impressive top speed, the 930 set new standards for high-performance sports cars. Despite its raw power, the rear-engine layout and refined suspension made it surprisingly manageable for everyday driving, further solidifying its status as an automotive icon.', image: '/images/Generations/1973.jfif' },
@@ -19,6 +37,9 @@ const Timeline = () => {
   return (
     <div className='bg-[#e9e8e8]'>
       <Navbar />
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
       <div className="container mx-auto py-20">
         <h1 className="text-4xl font-bold mb-10 text-black text-center">Generations</h1>
         <VerticalTimeline>
@@ -37,7 +58,17 @@ const Timeline = () => {
             </VerticalTimelineElement>
           ))}
         </VerticalTimeline>
+        <div className='flex justify-center pt-10 lg:pt-24'>
+    <button
+              className='bg-gray-600 text-white rounded-full p-4 w-12 h-12 hover:bg-gray-800 focus:outline-none'
+              onClick={scrollToTop}
+            >
+              <FaArrowUp />
+            </button>
+          </div>
       </div>
+      
+      )}
       <Footer />
     </div>
   );
