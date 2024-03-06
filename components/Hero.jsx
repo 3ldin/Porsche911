@@ -5,7 +5,7 @@ const Hero = () => {
         <div className="relative w-full h-screen overflow-hidden">
             <video
                 className="absolute top-0 left-0 min-w-full min-h-full object-cover"
-                src="/videoplayback.mp4"
+                src='videoplayback.mp4'
                 autoPlay
                 loop
                 muted
